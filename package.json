@@ -83,7 +83,7 @@
     "lucide-react": "^0.453.0",
     "memorystore": "^1.6.7",
     "mime-types": "^3.0.1",
-    "multer": "^2.0.1",
+    "multer": "^2.0.2",
     "openai": "^4.93.0",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
