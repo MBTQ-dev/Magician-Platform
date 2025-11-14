@@ -1,131 +1,202 @@
-# 360 Business Magician: VR Business Specialist + VR Client
+# 360 Magicians Platform
 
-A comprehensive business formation platform for deaf entrepreneurs, providing tools for business development, document management, and self-employment services.
+A comprehensive business platform for deaf entrepreneurs, providing tools for business development, code scaffolding, creative branding, and career development - all optimized for the deaf community.
 
-![360 Business Magician](https://business.360magicians.com)
+![360 Magicians Platform](https://business.360magicians.com)
 
-## 🚀 Features
+## 🎯 The 4 Magicians
 
-- **Complete Business Lifecycle Support**: From idea generation to business growth and management
-- **ASL Video Guidance**: Accessible content in American Sign Language
-- **Document Management**: Storage and organization for business documents
-- **Self-Employment Service Modules**: Comprehensive pricing tools
-- **VR Counselor Integration**: Connect with Vocational Rehabilitation specialists
-- **SBA Resource Library**: Access to Small Business Administration resources
-- **AI-Powered Tools**: Tools for business ideation and planning
+### 🏢 Business Magician
+- AI-powered business idea generation
+- Business formation & legal setup
+- Funding source discovery (grants, loans, crowdfunding)
+- Business planning & cost estimation
+- VR counselor integration
+
+### 💻 Developer Magician
+- Code scaffolding with popular frameworks
+- Tech stack recommendations
+- CI/CD configuration generation
+- Deployment automation
+- Deaf-accessible coding resources
+
+### 🎨 Creative Magician
+- AI-powered brand identity design
+- ASL video production services
+- Marketing content calendar
+- Deaf accessibility UI/UX guidelines
+- Social media strategy
+
+### 💼 Job Magician
+- Resume & video resume builder
+- AI-powered job matching
+- Interview preparation (deaf-specific)
+- Career development resources
+- Application tracking
+
+## 🚀 Quick Start
+
+```bash
+# Clone and setup
+git clone https://github.com/MBTQ-dev/Magician_Platform.git
+cd Magician_Platform
+chmod +x setup.sh
+./setup.sh
+
+# Configure environment
+cp .env.example .env
+nano .env  # Add your credentials
+
+# Run development server
+npm run dev
+```
+
+Visit http://localhost:5000
+
+## 📚 Complete Documentation
+
+For full deployment instructions, see **[DEPLOYMENT.md](./DEPLOYMENT.md)**
+
+Key sections:
+- Environment setup (Supabase, Cloudflare, R2)
+- Database schema (30+ tables)
+- CI/CD pipeline configuration
+- Cost breakdown ($5-50/month)
+- Troubleshooting guide
 
 ## 🔧 Technologies
 
-- React + TypeScript frontend
-- Express.js backend
-- PostgreSQL database with Drizzle ORM
-- HTMX for dynamic interactions
-- Google Cloud Storage integration
-- Telegram bot integration
-- Shadcn/UI components
-- Vercel deployment
+- **Frontend**: React + TypeScript + Tailwind CSS + Shadcn/UI
+- **Backend**: Express.js + Node.js
+- **Database**: PostgreSQL with Drizzle ORM (Supabase)
+- **Storage**: Cloudflare R2 (ASL videos & assets)
+- **Deployment**: Cloudflare Pages + Workers
+- **AI**: Anthropic Claude API
+- **Real-time**: Socket.io for live updates
 
 ## 📋 Requirements
 
 - Node.js 20+
-- PostgreSQL database (or use Docker)
-- Google Cloud Storage account (for document storage)
-- OpenAI API key (for AI features)
+- PostgreSQL database (or Supabase account)
+- Cloudflare account (for R2 and Pages)
+- Anthropic API key (for AI features)
 
-## 🏁 Getting Started
+## 🗄️ Database Schema
 
-### Quick Start
+The platform includes **30+ optimized tables**:
 
-1. Clone the repository
-2. Run setup script:
-   ```bash
-   node scripts/setup.js
-   ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
+**Core**: Users, progress tracking, activity logs  
+**Business**: Businesses, funding sources, formations, documents  
+**Developer**: Project templates, user projects  
+**Creative**: Brand assets, ASL videos, video requests  
+**Job**: Profiles, listings, applications, match scores  
+**VR**: Counselor profiles, matching, sessions  
+**Files**: R2 file management
 
-### Docker Setup
+See [DEPLOYMENT.md](./DEPLOYMENT.md#database-schema) for complete schema.
 
-We provide a Docker Compose configuration for easy local development:
+## 🔄 Development Workflow
 
 ```bash
-docker-compose up -d
+# Development
+npm run dev              # Start dev server (port 5000)
+npm run typecheck        # TypeScript checks
+npm run build           # Production build
+
+# Database
+npm run db:push         # Apply schema changes
+npm run db:studio       # Visual database editor
+
+# Deployment
+git push origin develop  # Deploy to staging (mbtq.dev)
+git push origin main     # Deploy to production (360magicians.com)
 ```
 
-Visit http://localhost:8080 to see the application.
+## 🌟 Key Features
 
-## 🗄️ Environment Variables
+- ✅ **Deaf-First Design** - ASL video integration throughout
+- ✅ **VR Counselor Matching** - AI-powered matching algorithm
+- ✅ **Complete Workflow** - From idea to launched business
+- ✅ **4 AI Agents** - Specialized help for every stage
+- ✅ **Cloudflare Stack** - Fast, reliable, cost-effective
+- ✅ **CI/CD Pipeline** - Automated testing and deployment
+- ✅ **Mobile Responsive** - Works on all devices
+- ✅ **Video-First** - Optimized for visual communication
 
-Create a `.env` file in the project root with the following variables:
+## 📊 Cost Breakdown
 
-```
-# Database connection
-DATABASE_URL=postgres://username:password@localhost:5432/business_magician
+**Monthly: $5-50** (vs $100-200+ traditional stack)
 
-# Google Cloud Storage
-GOOGLE_CLOUD_PROJECT_ID=your-project-id
-GOOGLE_CLOUD_BUCKET_NAME=your-bucket-name
-GOOGLE_APPLICATION_CREDENTIALS=path-to-credentials.json
+- Cloudflare Pages: **FREE**
+- Cloudflare R2 (10GB): **FREE**
+- Supabase: **$0-25/month**
+- Anthropic API: **$5-20/month**
 
-# OpenAI
-OPENAI_API_KEY=your-openai-api-key
+## 🚢 Deployment
 
-# Application settings
-NODE_ENV=development
-PORT=5000
-```
+### Automatic (Recommended)
 
-## 📂 Project Structure
+Configured GitHub Actions automatically deploy:
+- `develop` → mbtq.dev (staging)
+- `main` → 360magicians.com (production)
 
-```
-├── client/                  # Frontend React application
-│   ├── src/
-│   │   ├── components/      # UI components
-│   │   ├── hooks/           # Custom React hooks
-│   │   ├── lib/             # Utilities and API clients
-│   │   ├── pages/           # Page components
-├── server/                  # Backend Express application
-│   ├── routes/              # API routes
-│   ├── services/            # Business logic
-│   ├── index.ts             # Server entry point
-├── shared/                  # Shared code between client and server
-│   ├── schema.ts            # Database schema definitions
-├── scripts/                 # Utility scripts
-```
-
-## 🔄 Database Management
-
-We use Drizzle ORM for database operations. Some useful commands:
+### Manual
 
 ```bash
-# Push schema changes to database
-npm run db:push
-
-# Generate migration files
-npm run db:generate
-
-# Open Drizzle Studio (database UI)
-npm run db:studio
+npm run build
+# Deploy dist/public to Cloudflare Pages
+# Deploy dist/index.js to Workers or VPS
 ```
 
-## 📦 Deployment
+See [DEPLOYMENT.md](./DEPLOYMENT.md#deployment) for details.
 
-The application is configured for deployment on Vercel:
+## 🆘 Troubleshooting
 
+### Build Issues
 ```bash
-node scripts/vercel-deploy.js
+npm install --legacy-peer-deps  # Fix peer dependency issues
+npm run typecheck              # Check TypeScript errors
 ```
+
+### Database Issues
+```bash
+npm run db:push                # Sync schema
+```
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md#troubleshooting) for more help.
 
 ## 🤝 Contributing
 
-Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on contributing to this project.
+We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+
+```bash
+# Setup for development
+git clone https://github.com/YOUR_USERNAME/Magician_Platform.git
+cd Magician_Platform
+./setup.sh
+
+# Create feature branch
+git checkout -b feature/amazing-feature
+
+# Make changes, test, and submit PR
+```
 
 ## 📄 License
 
-[MIT License](LICENSE)
+[MIT License](./LICENSE)
 
 ## 👥 Team
 
-- 360 Magician Team
+- **360 Magician Team** - [MBTQ-dev](https://github.com/MBTQ-dev)
+- Built with ❤️ for the Deaf Community
+
+## 🔗 Links
+
+- **Production**: https://360magicians.com
+- **Staging**: https://mbtq.dev
+- **Documentation**: [DEPLOYMENT.md](./DEPLOYMENT.md)
+- **Issues**: [GitHub Issues](https://github.com/MBTQ-dev/Magician_Platform/issues)
+
+---
+
+**Need help?** Open an issue or contact support@360magicians.com
