@@ -1,4 +1,4 @@
-# 360 Business Magician: VR Business Specialist + VR Client
+# 360 Business Magician: Business Formation Platform 
 
 A comprehensive business formation platform for deaf entrepreneurs, providing tools for business development, document management, and self-employment services.
 
