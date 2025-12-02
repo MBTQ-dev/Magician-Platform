@@ -82,8 +82,13 @@ export class VRCounselorMatchingService {
       let score = 50; // Base score
       const reasons: string[] = [];
 
-      // Location matching
-      if (counselor.organization.toLowerCase().includes(preferences.location.toLowerCase())) {
+      // Location matching - check for state abbreviation or full state name
+      // Uses word boundary matching to avoid false positives (e.g., "CA" matching "CALIFORNIA" but not "CARDIAC")
+      const locationLower = preferences.location.toLowerCase().trim();
+      const orgLower = counselor.organization.toLowerCase();
+      const locationRegex = new RegExp(`\\b${locationLower}\\b`, 'i');
+      
+      if (locationRegex.test(orgLower) || orgLower.includes(locationLower)) {
         score += 20;
         reasons.push("Located in your area");
       }

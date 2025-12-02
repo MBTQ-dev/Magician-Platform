@@ -318,10 +318,13 @@ Sign-off: "Thank you for watching"
     failed: string[];
     recommendations: string[];
   } {
+    // Parse resolution to numeric value for proper comparison
+    const resolutionValue = parseInt(videoMetadata.resolution.replace(/[^0-9]/g, ''), 10) || 0;
+    
     const checks: Array<{name: string; passed: boolean; weight: number}> = [
       { name: "Captions available", passed: videoMetadata.hasCaptions, weight: 25 },
       { name: "Transcript available", passed: videoMetadata.hasTranscript, weight: 15 },
-      { name: "Minimum resolution (1080p)", passed: videoMetadata.resolution >= "1080", weight: 15 },
+      { name: "Minimum resolution (1080p)", passed: resolutionValue >= 1080, weight: 15 },
       { name: "Minimum frame rate (30fps)", passed: videoMetadata.frameRate >= 30, weight: 15 },
       { name: "Audio description available", passed: videoMetadata.hasAudioDescription, weight: 10 },
       { name: "Accessible video player", passed: videoMetadata.playerAccessible, weight: 20 }

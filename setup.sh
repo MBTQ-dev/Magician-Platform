@@ -19,11 +19,19 @@ NC='\033[0m' # No Color
 # Check Node.js version
 check_node() {
     if command -v node &> /dev/null; then
-        NODE_VERSION=$(node -v | cut -d'v' -f2 | cut -d'.' -f1)
-        if [ "$NODE_VERSION" -ge 20 ]; then
-            echo -e "${GREEN}✓ Node.js version $(node -v) detected${NC}"
+        # More robust version parsing that handles various node -v output formats
+        NODE_VERSION_FULL=$(node -v 2>/dev/null)
+        # Extract major version number, handling formats like "v20.10.0" or "20.10.0"
+        NODE_VERSION=$(echo "$NODE_VERSION_FULL" | sed 's/^v//' | cut -d'.' -f1)
+        
+        # Validate that we got a numeric value
+        if [[ "$NODE_VERSION" =~ ^[0-9]+$ ]] && [ "$NODE_VERSION" -ge 20 ]; then
+            echo -e "${GREEN}✓ Node.js version ${NODE_VERSION_FULL} detected${NC}"
+        elif [[ "$NODE_VERSION" =~ ^[0-9]+$ ]]; then
+            echo -e "${RED}✗ Node.js 20+ required. Current version: ${NODE_VERSION_FULL}${NC}"
+            exit 1
         else
-            echo -e "${RED}✗ Node.js 20+ required. Current version: $(node -v)${NC}"
+            echo -e "${RED}✗ Unable to determine Node.js version from: ${NODE_VERSION_FULL}${NC}"
             exit 1
         fi
     else
