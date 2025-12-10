@@ -10,6 +10,34 @@ import { deafAuthService } from '../services/deafAuthService';
 
 const router = Router();
 
+// Simple in-memory rate limiter for auth routes
+const authAttempts = new Map<string, { count: number; resetAt: number }>();
+
+function authRateLimiter(req: any, res: any, next: any) {
+  const ip = req.ip || req.connection.remoteAddress || 'unknown';
+  const now = Date.now();
+  const key = `auth_${ip}`;
+  
+  const attempt = authAttempts.get(key);
+  
+  if (attempt && attempt.resetAt > now) {
+    if (attempt.count >= 5) {
+      return res.status(429).json({ 
+        success: false, 
+        error: 'Too many authentication attempts. Please try again in 15 minutes.' 
+      });
+    }
+    attempt.count++;
+  } else {
+    authAttempts.set(key, {
+      count: 1,
+      resetAt: now + 15 * 60 * 1000 // 15 minutes
+    });
+  }
+  
+  next();
+}
+
 /**
  * Properties Routes
  */
@@ -284,7 +312,7 @@ router.post('/auth/register', async (req, res) => {
 });
 
 // Authenticate user
-router.post('/auth/login', async (req, res) => {
+router.post('/auth/login', authRateLimiter, async (req, res) => {
   try {
     const { username, password } = req.body;
     
