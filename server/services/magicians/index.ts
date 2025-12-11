@@ -8,10 +8,12 @@ export { BaseMagician, MagicianContext, MagicianAction, MagicianCoordinationRequ
 export { GatekeeperMagician } from './GatekeeperMagician';
 export { ReputationTrackerMagician } from './ReputationTrackerMagician';
 export { WorkflowAutomatorMagician } from './WorkflowAutomatorMagician';
+export { CommunityConciergeMagician } from './CommunityConciergeMagician';
 
 import GatekeeperMagician from './GatekeeperMagician';
 import ReputationTrackerMagician from './ReputationTrackerMagician';
 import WorkflowAutomatorMagician from './WorkflowAutomatorMagician';
+import CommunityConciergeMagician from './CommunityConciergeMagician';
 
 /**
  * Magician Registry
@@ -22,8 +24,8 @@ export const MagicianRegistry = {
   gatekeeper: GatekeeperMagician,
   reputation_tracker: ReputationTrackerMagician,
   workflow_automator: WorkflowAutomatorMagician,
+  community_concierge: CommunityConciergeMagician,
   // Future Magicians will be added here:
-  // community_concierge: CommunityConcierge Magician,
   // content_curator: ContentCuratorMagician,
   // safety_monitor: SafetyMonitorMagician,
   // opportunity_scout: OpportunityScoutMagician,
