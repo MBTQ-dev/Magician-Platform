@@ -14,6 +14,7 @@ import {
 import { db } from "./db";
 import { IStorage } from "./storage";
 import { and, eq, isNull, or, sql } from "drizzle-orm";
+import { hashPassword } from "./utils/passwordUtils";
 
 export class DatabaseStorage implements IStorage {
   // Users
@@ -28,10 +29,14 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
+    // Hash the password before storing
+    const hashedPassword = await hashPassword(insertUser.password);
+    
     const [user] = await db
       .insert(users)
       .values({
         ...insertUser,
+        password: hashedPassword,
         isDeaf: insertUser.isDeaf || null,
         preferASL: insertUser.preferASL || null,
         createdAt: new Date()
