@@ -653,7 +653,6 @@ class CreativeMagicianService extends BaseMagician {
    */
   private async marketingStrategy(context: MagicianContext, params: any): Promise<any> {
     const businessType = params.businessType || 'service';
-    const targetAudience = params.targetAudience || 'general';
     
     const strategy = {
       goals: [
