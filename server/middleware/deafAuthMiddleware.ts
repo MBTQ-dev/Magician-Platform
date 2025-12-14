@@ -62,6 +62,13 @@ async function verifyAuthentication(req: Request): Promise<AuthResult> {
   }
 
   try {
+    if (!deafAuthService || typeof deafAuthService.verifyToken !== 'function') {
+      console.error('DeafAuth Middleware: deafAuthService is not available or malformed.');
+      return {
+        authenticated: false,
+        error: 'Authentication service unavailable',
+      };
+    }
     const user = await deafAuthService.verifyToken(token);
 
     if (!user) {
