@@ -6,7 +6,7 @@
 
 import { db } from "../db";
 import { aslVideos, aslDictionaryTerms } from "../../shared/schema";
-import { eq, like, or, ilike } from "drizzle-orm";
+import { eq, or, ilike } from "drizzle-orm";
 
 export interface ASLVideo {
   id: number;
