@@ -492,3 +492,265 @@ export type MagicianAction = typeof magicianActions.$inferSelect;
 export type InsertMagicianAction = z.infer<typeof insertMagicianActionSchema>;
 export type WorkflowRecipe = typeof workflowRecipes.$inferSelect;
 export type InsertWorkflowRecipe = z.infer<typeof insertWorkflowRecipeSchema>;
+
+// ============================================================================
+// Vocational Rehabilitation Compliance Tables
+// ============================================================================
+
+// VR Program Enrollment
+export const vrEnrollment = pgTable("vr_enrollment", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().unique(),
+  vrAgency: text("vr_agency").notNull(),
+  vrCounselorId: integer("vr_counselor_id"),
+  vrCounselorName: text("vr_counselor_name"),
+  vrCounselorContact: text("vr_counselor_contact"),
+  enrollmentDate: date("enrollment_date").notNull(),
+  programType: text("program_type").notNull(), // self_employment, job_placement, training, supported_employment
+  ipeApproved: boolean("ipe_approved").default(false),
+  ipeApprovalDate: date("ipe_approval_date"),
+  currentPhase: text("current_phase"), // assessment, planning, training, placement, stabilization
+  caseStatus: text("case_status").notNull().default("active"), // active, completed, withdrawn, on_hold
+  closureDate: date("closure_date"),
+  successfulOutcome: boolean("successful_outcome"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const insertVREnrollmentSchema = createInsertSchema(vrEnrollment).pick({
+  userId: true,
+  vrAgency: true,
+  vrCounselorId: true,
+  vrCounselorName: true,
+  vrCounselorContact: true,
+  enrollmentDate: true,
+  programType: true,
+  ipeApproved: true,
+  ipeApprovalDate: true,
+  currentPhase: true,
+  caseStatus: true,
+});
+
+// VR Service Records
+export const vrServiceRecords = pgTable("vr_service_records", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull(),
+  serviceDate: date("service_date").notNull(),
+  serviceType: text("service_type").notNull(), // assessment, counseling, training, job_coaching, equipment, accommodation
+  serviceCost: integer("service_cost").default(0),
+  serviceProvider: text("service_provider"),
+  serviceDescription: text("service_description").notNull(),
+  outcome: text("outcome"),
+  notes: text("notes"),
+  complianceStatus: text("compliance_status").notNull().default("compliant"), // compliant, pending_review, non_compliant
+  regulationsCited: json("regulations_cited"), // Array of regulation references
+  vrCounselorApproved: boolean("vr_counselor_approved").default(false),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertVRServiceRecordSchema = createInsertSchema(vrServiceRecords).pick({
+  userId: true,
+  serviceDate: true,
+  serviceType: true,
+  serviceCost: true,
+  serviceProvider: true,
+  serviceDescription: true,
+  outcome: true,
+  notes: true,
+  complianceStatus: true,
+  regulationsCited: true,
+  vrCounselorApproved: true,
+});
+
+// VR Milestones and Progress Tracking
+export const vrMilestones = pgTable("vr_milestones", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull(),
+  milestoneName: text("milestone_name").notNull(),
+  milestoneType: text("milestone_type").notNull(), // ipe_approval, training_completion, job_placement, stabilization
+  targetDate: date("target_date"),
+  completedDate: date("completed_date"),
+  status: text("status").notNull().default("pending"), // pending, in_progress, completed, overdue
+  description: text("description"),
+  verification: text("verification"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const insertVRMilestoneSchema = createInsertSchema(vrMilestones).pick({
+  userId: true,
+  milestoneName: true,
+  milestoneType: true,
+  targetDate: true,
+  completedDate: true,
+  status: true,
+  description: true,
+  verification: true,
+});
+
+// ============================================================================
+// Workforce Solutions and Compliance Tables
+// ============================================================================
+
+// Workforce Development Programs
+export const workforceProgramEnrollment = pgTable("workforce_program_enrollment", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull(),
+  programId: text("program_id").notNull(),
+  programName: text("program_name").notNull(),
+  programProvider: text("program_provider"),
+  fundingSource: text("funding_source"), // WIOA, TAA, state, federal, private
+  startDate: date("start_date").notNull(),
+  endDate: date("end_date"),
+  expectedCompletionDate: date("expected_completion_date"),
+  status: text("status").notNull().default("active"), // active, completed, withdrawn, on_hold
+  programType: text("program_type").notNull(), // job_training, apprenticeship, certification, education
+  industry: text("industry"),
+  occupation: text("occupation"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const insertWorkforceProgramEnrollmentSchema = createInsertSchema(workforceProgramEnrollment).pick({
+  userId: true,
+  programId: true,
+  programName: true,
+  programProvider: true,
+  fundingSource: true,
+  startDate: true,
+  endDate: true,
+  expectedCompletionDate: true,
+  status: true,
+  programType: true,
+  industry: true,
+  occupation: true,
+});
+
+// Workforce Compliance Checks
+export const workforceComplianceChecks = pgTable("workforce_compliance_checks", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull(),
+  programId: text("program_id").notNull(),
+  checkType: text("check_type").notNull(), // attendance, performance, eligibility, progress
+  checkDate: date("check_date").notNull(),
+  passed: boolean("passed").notNull(),
+  findings: text("findings"),
+  correctiveActions: text("corrective_actions"),
+  followUpRequired: boolean("follow_up_required").default(false),
+  followUpDate: date("follow_up_date"),
+  regulationReference: text("regulation_reference"),
+  auditorName: text("auditor_name"),
+  notes: text("notes"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertWorkforceComplianceCheckSchema = createInsertSchema(workforceComplianceChecks).pick({
+  userId: true,
+  programId: true,
+  checkType: true,
+  checkDate: true,
+  passed: true,
+  findings: true,
+  correctiveActions: true,
+  followUpRequired: true,
+  followUpDate: true,
+  regulationReference: true,
+  auditorName: true,
+  notes: true,
+});
+
+// Employment Outcomes Tracking
+export const employmentOutcomes = pgTable("employment_outcomes", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull(),
+  programId: text("program_id"),
+  vrEnrollmentId: integer("vr_enrollment_id"),
+  employerName: text("employer_name").notNull(),
+  jobTitle: text("job_title").notNull(),
+  industry: text("industry"),
+  occupation: text("occupation"),
+  startDate: date("start_date").notNull(),
+  endDate: date("end_date"),
+  employmentType: text("employment_type").notNull(), // full_time, part_time, temporary, self_employment
+  wage: integer("wage"),
+  wageType: text("wage_type"), // hourly, salary, commission
+  deafFriendlyWorkplace: boolean("deaf_friendly_workplace"),
+  accommodationsProvided: boolean("accommodations_provided").default(false),
+  accommodationDetails: text("accommodation_details"),
+  retentionDays: integer("retention_days"), // Days employed for compliance
+  successful90Day: boolean("successful_90_day"), // VR success metric
+  successful180Day: boolean("successful_180_day"), // Workforce success metric
+  outcomeStatus: text("outcome_status").notNull().default("active"), // active, retained, separated, layoff
+  separationReason: text("separation_reason"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const insertEmploymentOutcomeSchema = createInsertSchema(employmentOutcomes).pick({
+  userId: true,
+  programId: true,
+  vrEnrollmentId: true,
+  employerName: true,
+  jobTitle: true,
+  industry: true,
+  occupation: true,
+  startDate: true,
+  endDate: true,
+  employmentType: true,
+  wage: true,
+  wageType: true,
+  deafFriendlyWorkplace: true,
+  accommodationsProvided: true,
+  accommodationDetails: true,
+  retentionDays: true,
+  successful90Day: true,
+  successful180Day: true,
+  outcomeStatus: true,
+  separationReason: true,
+});
+
+// Compliance Audit Trail
+export const complianceAuditTrail = pgTable("compliance_audit_trail", {
+  id: serial("id").primaryKey(),
+  entityType: text("entity_type").notNull(), // vr_service, workforce_program, employment_outcome, magician_action
+  entityId: integer("entity_id").notNull(),
+  userId: integer("user_id"),
+  auditType: text("audit_type").notNull(), // creation, modification, deletion, review, approval
+  performedBy: text("performed_by").notNull(),
+  performedAt: timestamp("performed_at").defaultNow(),
+  changes: json("changes"),
+  complianceImpact: text("compliance_impact"),
+  regulationsAffected: json("regulations_affected"),
+  notes: text("notes"),
+});
+
+export const insertComplianceAuditTrailSchema = createInsertSchema(complianceAuditTrail).pick({
+  entityType: true,
+  entityId: true,
+  userId: true,
+  auditType: true,
+  performedBy: true,
+  changes: true,
+  complianceImpact: true,
+  regulationsAffected: true,
+  notes: true,
+});
+
+// ============================================================================
+// Type Exports for VR and Workforce Compliance
+// ============================================================================
+
+export type VREnrollment = typeof vrEnrollment.$inferSelect;
+export type InsertVREnrollment = z.infer<typeof insertVREnrollmentSchema>;
+export type VRServiceRecord = typeof vrServiceRecords.$inferSelect;
+export type InsertVRServiceRecord = z.infer<typeof insertVRServiceRecordSchema>;
+export type VRMilestone = typeof vrMilestones.$inferSelect;
+export type InsertVRMilestone = z.infer<typeof insertVRMilestoneSchema>;
+export type WorkforceProgramEnrollment = typeof workforceProgramEnrollment.$inferSelect;
+export type InsertWorkforceProgramEnrollment = z.infer<typeof insertWorkforceProgramEnrollmentSchema>;
+export type WorkforceComplianceCheck = typeof workforceComplianceChecks.$inferSelect;
+export type InsertWorkforceComplianceCheck = z.infer<typeof insertWorkforceComplianceCheckSchema>;
+export type EmploymentOutcome = typeof employmentOutcomes.$inferSelect;
+export type InsertEmploymentOutcome = z.infer<typeof insertEmploymentOutcomeSchema>;
+export type ComplianceAuditTrail = typeof complianceAuditTrail.$inferSelect;
+export type InsertComplianceAuditTrail = z.infer<typeof insertComplianceAuditTrailSchema>;
