@@ -2,7 +2,7 @@ import { HandlerContext } from "fresh/server.ts";
 import { getTrustScore } from "../../lib/fibonacci.ts";
 import { connectDb } from "../../lib/db.ts";
 
-export async function POST(req: Request, ctx: HandlerContext) {
+export async function POST(req: Request, _ctx: HandlerContext) {
   try {
     const body = await req.json();
     const { userId } = body;
