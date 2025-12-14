@@ -62,3 +62,7 @@ coverage/
 # Uploaded files not tracked in git
 uploads/*
 !uploads/.gitkeep
+
+# Deno cache and lock files
+deno-app/.deno/
+deno-app/deno.lock

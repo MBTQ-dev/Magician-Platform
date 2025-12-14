@@ -161,6 +161,36 @@ All services are built with deaf-first accessibility and maintain strict complia
    npm run dev
    ```
 
+### Deno + Fresh Application (Optional)
+
+The platform includes an optional Deno-based Fresh framework application in the `/deno-app` directory that can run alongside the main Node.js application.
+
+**To run the Deno application:**
+
+1. Install Deno (if not already installed):
+   ```bash
+   curl -fsSL https://deno.land/x/install/install.sh | sh
+   ```
+
+2. Set the database environment variable:
+   ```bash
+   export SUPABASE_DB_URL="postgres://user:password@host:port/database"
+   ```
+
+3. Start the Deno Fresh app:
+   ```bash
+   cd deno-app
+   deno task dev
+   ```
+
+The Deno application will be available at `http://localhost:8000` and provides:
+- Fresh framework for server-side rendering
+- Example API routes (`/api/trust`)
+- Interactive island components
+- PostgreSQL connectivity
+
+See [deno-app/README.md](./deno-app/README.md) for detailed documentation.
+
 ## 📚 Documentation
 
 - **[Compliance Documentation](./COMPLIANCE-DOCUMENTATION.md)** - VR and workforce compliance standards

@@ -1,0 +1,9 @@
+{
+  "imports": {
+    "fresh/": "https://esm.sh/fresh@1.1.5/",
+    "preact": "https://esm.sh/preact@10.13.1",
+    "preact/": "https://esm.sh/preact@10.13.1/",
+    "preact/hooks": "https://esm.sh/preact@10.13.1/hooks",
+    "pg": "npm:postgres@3.1.0"
+  }
+}
