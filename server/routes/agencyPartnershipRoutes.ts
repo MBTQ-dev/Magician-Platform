@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { db } from '../database';
-import { partnerAgencies, agencyClients, agencyServices, users, vrCounselors, insertPartnerAgencySchema, insertAgencyClientSchema, insertAgencyServiceSchema } from '../../shared/schema';
+import { partnerAgencies, agencyClients, agencyServices, users, vrCounselors, insertPartnerAgencySchema, insertAgencyClientSchema, insertAgencyServiceSchema, updatePartnerAgencySchema, updateAgencyClientSchema, updateAgencyServiceSchema } from '../../shared/schema';
 import { eq, and, desc, inArray } from 'drizzle-orm';
 import { z } from 'zod';
 
@@ -103,11 +103,13 @@ router.post('/agencies', async (req, res) => {
 router.put('/agencies/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const updateData = req.body;
+    
+    // Validate input using update schema
+    const validatedData = updatePartnerAgencySchema.parse(req.body);
     
     const updatedAgency = await db.update(partnerAgencies)
       .set({
-        ...updateData,
+        ...validatedData,
         updatedAt: new Date()
       })
       .where(eq(partnerAgencies.id, parseInt(id)))
@@ -126,6 +128,13 @@ router.put('/agencies/:id', async (req, res) => {
       message: 'Partner agency updated successfully'
     });
   } catch (error: any) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({
+        success: false,
+        error: 'Validation error',
+        details: error.errors
+      });
+    }
     res.status(500).json({
       success: false,
       error: error.message
@@ -245,11 +254,13 @@ router.post('/agencies/:agencyId/clients', async (req, res) => {
 router.put('/clients/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const updateData = req.body;
+    
+    // Validate input using update schema
+    const validatedData = updateAgencyClientSchema.parse(req.body);
     
     const updatedClient = await db.update(agencyClients)
       .set({
-        ...updateData,
+        ...validatedData,
         updatedAt: new Date()
       })
       .where(eq(agencyClients.id, parseInt(id)))
@@ -268,6 +279,13 @@ router.put('/clients/:id', async (req, res) => {
       message: 'Client information updated successfully'
     });
   } catch (error: any) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({
+        success: false,
+        error: 'Validation error',
+        details: error.errors
+      });
+    }
     res.status(500).json({
       success: false,
       error: error.message
@@ -378,11 +396,13 @@ router.post('/clients/:clientId/services', async (req, res) => {
 router.put('/services/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const updateData = req.body;
+    
+    // Validate input using update schema
+    const validatedData = updateAgencyServiceSchema.parse(req.body);
     
     const updatedService = await db.update(agencyServices)
       .set({
-        ...updateData,
+        ...validatedData,
         updatedAt: new Date()
       })
       .where(eq(agencyServices.id, parseInt(id)))
@@ -401,6 +421,13 @@ router.put('/services/:id', async (req, res) => {
       message: 'Service updated successfully'
     });
   } catch (error: any) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({
+        success: false,
+        error: 'Validation error',
+        details: error.errors
+      });
+    }
     res.status(500).json({
       success: false,
       error: error.message

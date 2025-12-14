@@ -227,8 +227,8 @@ export const insertPartnerAgencySchema = createInsertSchema(partnerAgencies).pic
 // Agency Clients - clients referred by partner agencies
 export const agencyClients = pgTable("agency_clients", {
   id: serial("id").primaryKey(),
-  agencyId: integer("agency_id").notNull(),
-  userId: integer("user_id").notNull(),
+  agencyId: integer("agency_id").notNull().references(() => partnerAgencies.id),
+  userId: integer("user_id").notNull().references(() => users.id),
   clientName: text("client_name").notNull(),
   clientEmail: text("client_email").notNull(),
   clientPhone: text("client_phone"),
@@ -236,7 +236,7 @@ export const agencyClients = pgTable("agency_clients", {
   referralReason: text("referral_reason"),
   referralDate: timestamp("referral_date").defaultNow(),
   status: text("status").default("active"), // active, completed, inactive, transferred
-  assignedCounselorId: integer("assigned_counselor_id"),
+  assignedCounselorId: integer("assigned_counselor_id").references(() => vrCounselors.id),
   notes: text("notes"),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
@@ -258,7 +258,7 @@ export const insertAgencyClientSchema = createInsertSchema(agencyClients).pick({
 // Agency Services - track services provided to agency clients
 export const agencyServices = pgTable("agency_services", {
   id: serial("id").primaryKey(),
-  agencyClientId: integer("agency_client_id").notNull(),
+  agencyClientId: integer("agency_client_id").notNull().references(() => agencyClients.id),
   serviceType: text("service_type").notNull(), // vr, workforce, business_formation, etc.
   serviceName: text("service_name").notNull(),
   serviceDescription: text("service_description"),
@@ -281,6 +281,20 @@ export const insertAgencyServiceSchema = createInsertSchema(agencyServices).pick
   completionDate: true,
   outcome: true,
   feedback: true,
+});
+
+// Update schemas - only allow specific fields to be updated
+export const updatePartnerAgencySchema = insertPartnerAgencySchema.partial().omit({ 
+  // Omit fields that should never be updated
+});
+
+export const updateAgencyClientSchema = insertAgencyClientSchema.partial().omit({
+  agencyId: true, // Agency cannot be changed after creation
+  userId: true, // User cannot be changed after creation
+});
+
+export const updateAgencyServiceSchema = insertAgencyServiceSchema.partial().omit({
+  agencyClientId: true, // Client cannot be changed after creation
 });
 
 // Types
