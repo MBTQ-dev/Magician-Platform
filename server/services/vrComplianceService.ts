@@ -8,7 +8,6 @@
 import { z } from 'zod';
 import {
   VRComplianceRecordSchema,
-  WorkforceSolutionsRecordSchema,
 } from '../../shared/magicianSchemas';
 
 export interface VRComplianceReport {
