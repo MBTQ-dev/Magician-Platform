@@ -530,7 +530,6 @@ class CreativeMagicianService extends BaseMagician {
    * Build creative portfolio
    */
   private async buildPortfolio(context: MagicianContext, params: any): Promise<any> {
-    const portfolioType = params.portfolioType || 'general';
     
     const portfolio = {
       structure: {
