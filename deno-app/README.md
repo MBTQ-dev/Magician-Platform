@@ -81,7 +81,15 @@ deno-app/
 
 ## Database Integration
 
-The application connects to PostgreSQL using the `SUPABASE_DB_URL` environment variable. The example trust API queries the `messages` table, but you can modify `routes/api/trust.ts` to match your database schema.
+The application connects to PostgreSQL using the `SUPABASE_DB_URL` environment variable and the `postgres` npm package (postgres@3.1.0). This package uses tagged template literals for queries with automatic parameter sanitization.
+
+Example query:
+```typescript
+const sql = connectDb();
+const result = await sql`SELECT * FROM users WHERE id = ${userId}`;
+```
+
+The example trust API queries the `messages` table, but you can modify `routes/api/trust.ts` to match your database schema.
 
 ## Customization
 

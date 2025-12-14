@@ -10,14 +10,12 @@ export async function POST(req: Request, ctx: HandlerContext) {
     if (!userId) return new Response(JSON.stringify({ error: "userId required" }), { status: 400 });
 
     // Example: read from Postgres and compute something
-    const client = await connectDb();
+    const sql = connectDb();
     try {
       // Example query — adjust to your schema
-      const result = await client.queryObject<{ count: number }>(
-        "SELECT COUNT(*)::int as count FROM public.messages WHERE user_id = $1",
-        [userId]
-      );
-      const count = result.rows?.[0]?.count ?? 0;
+      // Using tagged template literal syntax from postgres package
+      const result = await sql`SELECT COUNT(*)::int as count FROM public.messages WHERE user_id = ${userId}`;
+      const count = result[0]?.count ?? 0;
       const score = getTrustScore(count);
 
       return new Response(JSON.stringify({ userId, count, score }), {
@@ -25,7 +23,7 @@ export async function POST(req: Request, ctx: HandlerContext) {
         headers: { "Content-Type": "application/json" },
       });
     } finally {
-      await client.end();
+      await sql.end();
     }
   } catch (err) {
     console.error("trust API error:", err);
