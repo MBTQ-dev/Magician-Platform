@@ -105,13 +105,48 @@ PORT=5000
 │   │   ├── lib/             # Utilities and API clients
 │   │   ├── pages/           # Page components
 ├── server/                  # Backend Express application
-│   ├── routes/              # API routes
-│   ├── services/            # Business logic
-│   ├── index.ts             # Server entry point
+│   ├── routes/              # API routes (modular route handlers)
+│   ├── services/            # Business logic and external integrations
+│   │   ├── notionService.ts         # Notion API integration
+│   │   ├── northwestAgentService.ts # Business formation services
+│   │   ├── magicians/               # 360 Magicians AI agents
+│   ├── middleware/          # Express middleware
+│   ├── index.ts             # Main server entry point (lazy-loaded routes)
+│   ├── routes.ts            # Central route registration
 ├── shared/                  # Shared code between client and server
-│   ├── schema.ts            # Database schema definitions
+│   ├── schema.ts            # Database schema definitions (Drizzle ORM)
 ├── scripts/                 # Utility scripts
+├── archived_legacy_files/   # Archived legacy standalone files (not in repo)
 ```
+
+## 🏗️ Architecture
+
+### Current API Architecture
+
+The platform uses a **unified Express.js API server** with modular routes:
+
+- **Main Server**: `server/index.ts` - Express server with lazy-loaded routes for memory efficiency
+- **Route Registration**: `server/routes.ts` - Central registration of all API routes
+- **Modular Routes**: `server/routes/*.ts` - Individual route handlers for:
+  - Business formation (`businessFormationRoutes.ts`)
+  - Ecosystem services (`ecosystemRoutes.ts`)
+  - AI/ML operations (`ai.ts`, `anthropic.ts`, `openai-test.ts`)
+  - 360 Magicians (`magiciansRoutes.ts`)
+  - Storage and file management (`storage.ts`)
+  - And more...
+
+### Services Layer
+
+Business logic is organized in `server/services/`:
+- **notionService.ts**: Notion API integration for knowledge management
+- **northwestAgentService.ts**: Business entity formation through Northwest Registered Agent
+- **deafAuthService.ts**: Authentication for deaf-first platform
+- **fibonroseService.ts**: Reputation scoring system
+- **magicians/**: 360 Magicians AI agents (GatekeeperMagician, ReputationTrackerMagician, etc.)
+
+### Legacy Files Note
+
+Legacy standalone API files have been archived to `archived_legacy_files/` (excluded from git). See `ARCHIVED_FILES.md` for details on migrated functionality.
 
 ## 🔄 Database Management
 
