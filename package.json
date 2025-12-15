@@ -13,6 +13,8 @@
     "db:generate": "drizzle-kit generate:pg",
     "db:migrate": "node scripts/db-setup.js",
     "db:check": "drizzle-kit check:pg",
+    "db:seed:opportunities": "tsx scripts/seed-opportunities.ts",
+    "db:seed:user-interests": "tsx scripts/seed-user-interests.ts",
     "lint": "echo 'Add your linting configuration here'",
     "typecheck": "tsc --noEmit",
     "test": "echo 'Add your testing command here'"
