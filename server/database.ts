@@ -436,7 +436,9 @@ export class DatabaseStorage implements IStorage {
     // Order by priority (higher first) and then by creation date
     const result = await query.orderBy(desc(opportunities.priority), desc(opportunities.createdAt));
     
-    // Filter by tags and target audience in memory due to array filtering limitations
+    // Filter by tags and target audience in memory due to Drizzle ORM array filtering limitations
+    // Note: For large datasets, consider implementing database-level array filtering with raw SQL
+    // or adding GIN indexes on array columns (PostgreSQL) for better performance
     let filteredResult = result;
     
     if (params?.tags && params.tags.length > 0) {
