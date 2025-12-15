@@ -43,7 +43,7 @@ Deno.test("PinkFlow module exports", async () => {
   assertEquals(typeof pinkflow.testPerformance, "function");
 });
 
-Deno.test("Supabase client creation (requires env vars)", () => {
+Deno.test("Supabase client creation (requires env vars)", async () => {
   // This test verifies that the module can be imported
   // Actual connection test requires SUPABASE_URL and SUPABASE_KEY
   try {

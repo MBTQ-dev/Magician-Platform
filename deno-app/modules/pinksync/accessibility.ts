@@ -87,13 +87,23 @@ async function generateCaptions(content: string): Promise<string[]> {
 }
 
 /**
- * Generate ASL video for content (placeholder)
+ * Generate ASL video for content
+ * 
+ * TODO: Integrate with actual ASL video generation service
+ * Set ASL_VIDEO_SERVICE_URL environment variable for production
  */
 async function generateASLVideo(content: string): Promise<string | undefined> {
-  // TODO: Integrate with ASL video generation service
-  // For now, return placeholder URL
+  // Placeholder implementation - integrate with actual service
+  const serviceUrl = Deno.env.get("ASL_VIDEO_SERVICE_URL");
+  
+  if (!serviceUrl) {
+    console.warn("ASL_VIDEO_SERVICE_URL not configured. ASL video generation disabled.");
+    return undefined;
+  }
+  
   if (content.length > 0) {
-    return `https://asl-videos.example.com/${crypto.randomUUID()}.mp4`;
+    // TODO: Call actual ASL video generation API
+    return `${serviceUrl}/generate/${crypto.randomUUID()}.mp4`;
   }
   return undefined;
 }
