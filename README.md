@@ -6,194 +6,53 @@
 
 ## 🌟 Overview
 
-The Magician Platform is a **reusable compliance and workflow system** originally built to support deaf entrepreneurs, job seekers, developers, and creatives. It provides battle-tested, modular components that any organization can integrate to handle:
+- **Complete Business Lifecycle Support**: From idea generation to business growth and management
+- **ASL Video Guidance**: Accessible content in American Sign Language
+- **DeafAuth Authentication**: Deaf-first authentication system with accessibility-focused features
+- **Document Management**: Storage and organization for business documents
+- **Self-Employment Service Modules**: Comprehensive pricing tools
+- **VR Counselor Integration**: Connect with Vocational Rehabilitation specialists
+- **SBA Resource Library**: Access to Small Business Administration resources
+- **AI-Powered Tools**: Tools for business ideation and planning
 
-- **Vocational Rehabilitation (VR) Compliance** - Complete 34 CFR Part 361 tracking and reporting
-- **Workforce Development** - WIOA-aligned program management and outcome tracking
-- **Accessibility Standards** - WCAG 2.1 Level AA compliance tooling and auditing
-- **Security Validation** - Authentication, authorization, and audit logging
-- **Workflow Automation** - 8 specialized AI "Magician" agents for task automation
-- **Database Schema** - Production-ready schemas with Drizzle ORM and Zod validation
+## 🔐 Authentication
 
-### Why Use This System?
+The platform uses **DeafAuth** - a custom authentication system designed specifically for deaf-first accessibility, integrated with **Supabase** for secure backend services.
 
-✅ **Modular Architecture** - Use individual components or the full system  
-✅ **Production Ready** - Battle-tested with real VR and workforce programs  
-✅ **Compliance Built-In** - Federal regulations baked into the schema and validation  
-✅ **Accessibility First** - Deaf-first design with WCAG 2.1 AA compliance  
-✅ **Type-Safe** - Full TypeScript with Zod runtime validation  
-✅ **Well Documented** - Comprehensive guides for integration and deployment  
+### DeafAuth Features:
+- **Accessibility-First Design**: Visual alerts, ASL video verification support, high contrast modes
+- **Communication Preferences**: Support for ASL, text, or mixed communication modes
+- **Supabase Integration**: Secure authentication and real-time database capabilities
+- **JWT Token Authentication**: Secure session management with automatic refresh
+- **Rate Limiting**: Protection against brute force attacks
 
-### Use Cases
-
-- **VR Agencies**: Track enrollments, services, milestones, and outcomes
-- **Workforce Programs**: Manage WIOA compliance and performance metrics
-- **Government Contractors**: Meet accessibility and compliance requirements
-- **SaaS Platforms**: Integrate compliance tracking into your product
-- **Educational Institutions**: Track student services and outcomes
-- **Healthcare Systems**: Manage rehabilitation and employment services
-
-## 🔌 Integration Options
-
-The Magician Platform can be integrated into your project in multiple ways:
-
-### 1. **Direct API Integration**
-Use our RESTful API endpoints to add compliance tracking to your existing application:
-```typescript
-// Example: Create VR enrollment via API
-const response = await fetch('https://your-deployment.com/api/vr/enrollment', {
-  method: 'POST',
-  headers: { 'Authorization': `Bearer ${token}` },
-  body: JSON.stringify({ vrAgency, programType, ... })
-});
-```
-
-### 2. **Database Schema Import**
-Copy our battle-tested database schemas into your project:
-```typescript
-import { vrEnrollment, vrServiceRecords } from '@magician-platform/schemas';
-// Use with your own Drizzle ORM setup
-```
-
-### 3. **Workflow Modules**
-Use our GitHub Actions workflows for automated compliance checks:
-```yaml
-# In your .github/workflows/
-- uses: MBTQ-dev/magician-platform-action@v1
-  with:
-    check-type: 'vr-compliance'
-```
-
-### 4. **Full Deployment**
-Deploy the entire platform as a microservice and integrate via webhooks:
-```typescript
-// Subscribe to compliance events
-POST /api/webhooks/register
-{ "url": "your-app.com/webhook", "events": ["vr.milestone.completed"] }
-```
-
-See the **[Deployment Guide](./DEPLOYMENT_GUIDE.md)** for complete integration instructions.
-
-## 🤖 360 Magicians - AI Agent Services
-
-### Core Platform Magicians
-
-1. **Gatekeeper Magician** 🚪
-   - Identity verification and authentication
-   - Access control and user routing
-   - DeafAuth integration
-   - Security monitoring
-
-2. **Reputation Tracker Magician** ⭐
-   - Fibonrose reputation scoring
-   - Badge issuance and tracking
-   - Contribution recording
-   - Community trust building
-
-3. **Workflow Automator Magician** 🔄
-   - Automated task execution
-   - Workflow recipe management
-   - System health monitoring
-   - Integration coordination
-
-4. **Community Concierge Magician** 💬
-   - Question answering (FAQ with ASL)
-   - Resource discovery
-   - Mentor matching
-   - Opportunity surfacing
-
-### Vocational Magicians
-
-5. **Business Magician** 💼
-   - Business idea generation
-   - Business plan creation
-   - Formation guidance (LLC, Corp, etc.)
-   - SBA resource navigation
-   - **VR self-employment pathway support**
-   - Financial planning and pricing
-
-6. **Developer Magician** 💻
-   - Project scaffolding and generation
-   - Code review and debugging
-   - Accessibility auditing (WCAG 2.1 AA)
-   - Deployment guidance
-   - Technical mentorship
-   - Best practices
-
-7. **Job Magician** 🎯
-   - Job matching and search
-   - Resume and interview prep
-   - Accommodation guidance (ADA)
-   - **VR job placement support**
-   - Skills assessment
-   - Networking opportunities
-
-8. **Creative Magician** 🎨
-   - ASL content creation guidance
-   - Video production standards
-   - Brand development
-   - Portfolio building
-   - Marketing strategy
-   - Accessibility design
-
-## 🎯 Deno + Supabase Integration (New!)
-
-The platform now supports **dual runtime environments**:
-- **Node.js Backend**: Existing Express server for production workloads
-- **Deno Application**: Modern, secure runtime with Supabase integration
-
-### Modular Trio Components
-
-1. **DeafAuth** 🔐 - Supabase-powered authentication with OAuth support
-2. **PinkSync** ⚡ - Real-time communication and accessibility optimization
-3. **FibonRose** ⭐ - Fibonacci-based reputation and trust scoring
-4. **PinkFlow** ✅ - Automated testing and workflow validation
-
-👉 **[Read the complete Deno & Supabase Integration Guide](./DENO_SUPABASE_GUIDE.md)**
-
-## 🚀 Key Features
-
-### Vocational Rehabilitation Compliance
-- ✅ **VR enrollment and tracking** - Full case management
-- ✅ **IPE (Individualized Plan for Employment)** support
-- ✅ **Service authorization and documentation**
-- ✅ **Milestone tracking and monitoring**
-- ✅ **90-day employment outcome tracking**
-- ✅ **Self-employment pathway guidance**
-- ✅ **Compliance with 34 CFR Part 361**
-
-### Workforce Solutions
-- ✅ **WIOA program integration**
-- ✅ **Employment outcome tracking**
-- ✅ **Performance metrics and reporting**
-- ✅ **Compliance checks and auditing**
-- ✅ **Retention milestone monitoring**
-
-### Accessibility Features
-- ✅ **ASL video content throughout**
-- ✅ **WCAG 2.1 Level AA compliance**
-- ✅ **Full keyboard navigation**
-- ✅ **Screen reader optimization**
-- ✅ **Visual notification system**
-- ✅ **Deaf-first design principles**
-
-### Technical Excellence
-- ✅ **Comprehensive Zod validation** - Type-safe operations
-- ✅ **Semantic database schema** - Drizzle ORM
-- ✅ **Inter-Magician coordination** - Agent communication
-- ✅ **Audit trail logging** - Full compliance tracking
-- ✅ **DeafAuth + JWT** - Secure authentication
-- ✅ **Rate limiting and security**
+### Authentication Endpoints:
+- `POST /api/auth/register` - Register a new user
+- `POST /api/auth/login` - Login with email and password
+- `POST /api/auth/logout` - Logout current user
+- `GET /api/auth/me` - Get current authenticated user
+- `POST /api/auth/refresh` - Refresh authentication session
+- `POST /api/auth/forgot-password` - Request password reset
+- `PUT /api/auth/accessibility-settings` - Update accessibility preferences
+- `GET /api/auth/status` - Check authentication status
 
 ## 🔧 Technologies
 
+- React + TypeScript frontend
+- Express.js backend
+- PostgreSQL database with Drizzle ORM
+- **Supabase** for authentication and real-time features
+- **DeafAuth** custom authentication service
+- HTMX for dynamic interactions
+- Google Cloud Storage integration
+- Shadcn/UI component
 - **Frontend**: React + TypeScript, Shadcn/UI components
 - **Backend**: Express.js + TypeScript
 - **Database**: PostgreSQL with Drizzle ORM
 - **Validation**: Zod schemas throughout
 - **Authentication**: DeafAuth + JWT tokens
 - **Storage**: Google Cloud Storage
-- **Deployment**: Vercel
+- **Deployment**: Uncomfirmed
 - **AI/ML**: OpenAI, Anthropic Claude, Google AI
 - **Real-time**: Socket.io, HTMX
 
@@ -201,6 +60,7 @@ The platform now supports **dual runtime environments**:
 
 - Node.js 20+
 - PostgreSQL database (or use Docker)
+- **Supabase account** (for authentication and real-time features)
 - Google Cloud Storage account (for document storage)
 - OpenAI API key (for AI features)
 
@@ -537,9 +397,16 @@ Visit http://localhost:8080 to see the application.
 
 Create a `.env` file in the project root with the following variables:
 
-```
+```bash
 # Database connection
 DATABASE_URL=postgres://username:password@localhost:5432/business_magician
+
+# Authentication (DeafAuth + Supabase)
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_KEY=your-supabase-anon-key
+SUPABASE_SERVICE_KEY=your-supabase-service-role-key
+JWT_SECRET=your-secure-jwt-secret-change-in-production
+APP_URL=http://localhost:5000
 
 # Google Cloud Storage
 GOOGLE_CLOUD_PROJECT_ID=your-project-id
@@ -552,7 +419,19 @@ OPENAI_API_KEY=your-openai-api-key
 # Application settings
 NODE_ENV=development
 PORT=5000
+
+# Frontend settings
+VITE_API_BASE_URL=/api
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_KEY=your-supabase-anon-key
 ```
+
+### Supabase Setup
+
+1. Create a new project at [supabase.com](https://supabase.com)
+2. Navigate to Project Settings > API
+3. Copy the URL and anon key to your `.env` file
+4. (Optional) Copy the service role key for server-side operations
 
 ## 📂 Project Structure
 
@@ -560,7 +439,7 @@ PORT=5000
 ├── client/                  # Frontend React application
 │   ├── src/
 │   │   ├── components/      # UI components
-│   │   ├── hooks/           # Custom React hooks
+│   │   ├── hooks/           # Custom React hooks (including useDeafAuth)
 │   │   ├── lib/             # Utilities and API clients
 │   │   ├── pages/           # Page components
 ├── server/                  # Backend Express application
