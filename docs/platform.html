@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MBTQ Platform - Authentication, Sync, and Trust infrastructure for accessible applications">
+    <title>MBTQ Platform - DeafAUTH, PinkSync, Fibonrose</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .pillar-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            border-left: 4px solid #6366f1;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 8px;
+        }
+        .pillar-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .pillar-icon {
+            font-size: 3rem;
+        }
+        .pillar-title {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        .pillar-path {
+            color: #6366f1;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            margin-left: auto;
+        }
+        .endpoint-list {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+        .endpoint {
+            font-family: 'Courier New', monospace;
+            color: #059669;
+            font-weight: 600;
+            display: block;
+            margin: 0.5rem 0;
+        }
+        .repo-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin: 1rem 0;
+        }
+        .repo-name {
+            font-weight: 600;
+            color: #6366f1;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .repo-purpose {
+            color: #475569;
+            margin-bottom: 0.5rem;
+        }
+        .repo-pillars {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .pillar-tag {
+            background: #ddd6fe;
+            color: #5b21b6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .integration-box {
+            background: #fefce8;
+            border: 2px solid #fbbf24;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        .diagram {
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border: 2px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🔷 MBTQ Platform</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#pillars">Three Pillars</a></li>
+                <li><a href="#integration">Integration</a></li>
+                <li><a href="#repos">Repositories</a></li>
+                <li><a href="https://github.com/MBTQ-dev" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">MBTQ Platform</h1>
+                <p class="hero-subtitle">
+                    Authentication, Sync, and Trust infrastructure for accessible applications like vr4deaf.org
+                </p>
+                <div class="diagram">
+                    <pre style="text-align: left; display: inline-block;">
+┌─────────────────────────────────────────┐
+│         MBTQ Platform Layer             │
+├─────────────────────────────────────────┤
+│  🔐 DeafAUTH    ⚡ PinkSync   ⭐ Fibonrose │
+│    /auth          /sync        /trust    │
+└─────────────────────────────────────────┘
+              ▼          ▼          ▼
+┌─────────────────────────────────────────┐
+│       Applications Layer                │
+│  • vr4deaf.org                          │
+│  • Future accessible apps               │
+└─────────────────────────────────────────┘
+                    </pre>
+                </div>
+                <div class="hero-badges">
+                    <span class="badge badge-success">🔐 DeafAUTH</span>
+                    <span class="badge badge-success">⚡ PinkSync</span>
+                    <span class="badge badge-success">⭐ Fibonrose</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview" class="section">
+        <div class="container">
+            <h2 class="section-title">Platform Overview</h2>
+            <p class="section-description">
+                MBTQ Platform provides the controller/platform layer for accessible applications.
+                It consists of three core pillars that handle authentication, synchronization, and trust scoring.
+            </p>
+        </div>
+    </section>
+
+    <!-- Three Pillars Section -->
+    <section id="pillars" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Three Pillars</h2>
+
+            <!-- DeafAUTH Pillar -->
+            <div class="pillar-section">
+                <div class="pillar-header">
+                    <span class="pillar-icon">🔐</span>
+                    <div>
+                        <h3 class="pillar-title">DeafAUTH</h3>
+                        <span class="pillar-path">/auth</span>
+                    </div>
+                </div>
+                <p>
+                    <strong>Authentication & Identity Management</strong><br>
+                    DeafAUTH provides Supabase-powered authentication with OAuth support, 
+                    specifically designed for deaf-first accessibility. Handles user identity,
+                    session management, and secure authentication flows.
+                </p>
+                <div class="endpoint-list">
+                    <strong>Key Features:</strong>
+                    <ul>
+                        <li>OAuth 2.0 authentication</li>
+                        <li>JWT token management</li>
+                        <li>User profile management</li>
+                        <li>Event tracking and audit logs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- PinkSync Pillar -->
+            <div class="pillar-section">
+                <div class="pillar-header">
+                    <span class="pillar-icon">⚡</span>
+                    <div>
+                        <h3 class="pillar-title">PinkSync</h3>
+                        <span class="pillar-path">/sync</span>
+                    </div>
+                </div>
+                <p>
+                    <strong>Real-time Communication & Accessibility</strong><br>
+                    PinkSync manages real-time data synchronization and accessibility optimizations.
+                    Ensures seamless communication between services and provides real-time updates
+                    with accessibility-first design principles.
+                </p>
+                <div class="endpoint-list">
+                    <strong>Key Features:</strong>
+                    <ul>
+                        <li>Real-time data synchronization</li>
+                        <li>WebSocket/Socket.io integration</li>
+                        <li>Accessibility-optimized messaging</li>
+                        <li>Visual notification system</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Fibonrose Pillar -->
+            <div class="pillar-section">
+                <div class="pillar-header">
+                    <span class="pillar-icon">⭐</span>
+                    <div>
+                        <h3 class="pillar-title">Fibonrose</h3>
+                        <span class="pillar-path">/trust</span>
+                    </div>
+                </div>
+                <p>
+                    <strong>Reputation & Trust Scoring</strong><br>
+                    Fibonrose implements a Fibonacci-based reputation and trust scoring system.
+                    Tracks user contributions, community engagement, and builds trust metrics
+                    across the platform ecosystem.
+                </p>
+                <div class="endpoint-list">
+                    <strong>Key Features:</strong>
+                    <ul>
+                        <li>Fibonacci-based scoring algorithm</li>
+                        <li>Badge issuance and tracking</li>
+                        <li>Contribution recording</li>
+                        <li>Community trust metrics</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integration Section -->
+    <section id="integration" class="section">
+        <div class="container">
+            <h2 class="section-title">Integration Entry Points</h2>
+            
+            <div class="integration-box">
+                <h3>For apps like <strong>vr4deaf.org</strong></h3>
+                <p>
+                    Integrate MBTQ Platform services into your application by connecting to the Supabase DeafAUTH project.
+                </p>
+            </div>
+
+            <h3>DeafAUTH Endpoints</h3>
+            <div class="endpoint-list">
+                <code class="endpoint">GET  /deafauth/profile</code>
+                <p style="margin-left: 1rem; color: #64748b;">Retrieve user profile and authentication status</p>
+                
+                <code class="endpoint">POST /deafauth/profile</code>
+                <p style="margin-left: 1rem; color: #64748b;">Update user profile information</p>
+                
+                <code class="endpoint">GET  /deafauth/events</code>
+                <p style="margin-left: 1rem; color: #64748b;">Access authentication event logs and audit trail</p>
+            </div>
+
+            <h3>Supabase Configuration</h3>
+            <div class="endpoint-list">
+                <p>Point your application to the DeafAUTH Supabase project:</p>
+                <pre style="background: #f8fafc; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code>SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_KEY=your-service-key</code></pre>
+            </div>
+
+            <h3>Additional Resources</h3>
+            <div class="grid-3" style="margin-top: 2rem;">
+                <div class="card">
+                    <div class="card-icon">📝</div>
+                    <h4>Documentation</h4>
+                    <p><a href="https://notion.so/deafauth-plan" target="_blank">DeafAUTH Plan — Checklist</a></p>
+                    <p>Complete implementation guide and checklist</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔗</div>
+                    <h4>GitHub Repos</h4>
+                    <p>See <a href="#repos">Organization Map</a> below for all repositories</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💬</div>
+                    <h4>Support</h4>
+                    <p>Open issues on respective GitHub repositories</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organization Map Section -->
+    <section id="repos" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Organization Map</h2>
+            <p class="section-description">
+                Where things live in the MBTQ ecosystem:
+            </p>
+
+            <div class="repo-card">
+                <div class="repo-name">
+                    <a href="https://github.com/MBTQ-dev/deaf-ecosystem" target="_blank">
+                        📦 deaf-ecosystem
+                    </a>
+                </div>
+                <div class="repo-purpose">
+                    Core ecosystem infrastructure and shared libraries for deaf-accessible applications
+                </div>
+                <div class="repo-pillars">
+                    <span class="pillar-tag">🔐 DeafAUTH</span>
+                    <span class="pillar-tag">⚡ PinkSync</span>
+                    <span class="pillar-tag">⭐ Fibonrose</span>
+                </div>
+            </div>
+
+            <div class="repo-card">
+                <div class="repo-name">
+                    <a href="https://github.com/MBTQ-dev/nextjs-deafauth" target="_blank">
+                        🔐 nextjs-deafauth
+                    </a>
+                </div>
+                <div class="repo-purpose">
+                    Next.js implementation of DeafAUTH authentication system with Supabase integration
+                </div>
+                <div class="repo-pillars">
+                    <span class="pillar-tag">🔐 DeafAUTH</span>
+                </div>
+            </div>
+
+            <div class="repo-card">
+                <div class="repo-name">
+                    <a href="https://github.com/MBTQ-dev/pinksync" target="_blank">
+                        ⚡ pinksync
+                    </a>
+                </div>
+                <div class="repo-purpose">
+                    Real-time synchronization service with accessibility-optimized communication protocols
+                </div>
+                <div class="repo-pillars">
+                    <span class="pillar-tag">⚡ PinkSync</span>
+                </div>
+            </div>
+
+            <div class="repo-card">
+                <div class="repo-name">
+                    <a href="https://github.com/MBTQ-dev/fibonrose" target="_blank">
+                        ⭐ fibonrose
+                    </a>
+                </div>
+                <div class="repo-purpose">
+                    Fibonacci-based reputation and trust scoring system for community engagement
+                </div>
+                <div class="repo-pillars">
+                    <span class="pillar-tag">⭐ Fibonrose</span>
+                </div>
+            </div>
+
+            <div class="repo-card">
+                <div class="repo-name">
+                    <a href="https://github.com/MBTQ-dev/VR4Deaf-Apps" target="_blank">
+                        🎯 VR4Deaf-Apps
+                    </a>
+                </div>
+                <div class="repo-purpose">
+                    Main application repository for vr4deaf.org - VR compliance tracking and workforce development platform
+                </div>
+                <div class="repo-pillars">
+                    <span class="pillar-tag">🔐 DeafAUTH</span>
+                    <span class="pillar-tag">⚡ PinkSync</span>
+                    <span class="pillar-tag">⭐ Fibonrose</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: #f0f9ff; border-radius: 8px; border-left: 4px solid #0ea5e9;">
+                <strong>Platform Organization:</strong> 
+                <a href="https://github.com/MBTQ-dev" target="_blank" style="color: #0284c7; font-weight: 600;">
+                    github.com/MBTQ-dev
+                </a>
+                <p style="margin-top: 0.5rem; color: #475569;">
+                    This is the platform organization that controls /auth (DeafAUTH), /sync (PinkSync), 
+                    and /trust (Fibonrose), used by vr4deaf.org and future accessible applications.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #1e293b; color: white; padding: 2rem 0; text-align: center; margin-top: 4rem;">
+        <div class="container">
+            <p>
+                <strong>MBTQ Platform</strong> — Built with ❤️ for accessible applications
+            </p>
+            <p style="margin-top: 1rem; color: #94a3b8;">
+                <a href="https://github.com/MBTQ-dev" target="_blank" style="color: #93c5fd;">GitHub Organization</a> | 
+                <a href="https://vr4deaf.org" target="_blank" style="color: #93c5fd;">VR4Deaf.org</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
