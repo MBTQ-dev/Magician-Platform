@@ -195,15 +195,6 @@ export async function addPoints(
     const badgesEarned = await checkForNewBadges(userId, action, newScore);
 
     // Log the activity
-    const activity: FibonroseActivity = {
-      timestamp: new Date(),
-      action,
-      pointsChange,
-      newTotal: newScore,
-      source,
-      details,
-    };
-
     // In production, this would update the database
     console.log('[Fibonrose] Points added:', {
       userId,
