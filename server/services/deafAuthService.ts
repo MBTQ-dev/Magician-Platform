@@ -82,7 +82,8 @@ export async function authenticate(
       .select()
       .from(users)
       .where(eq(users.username, username))
-      .limit(1);
+      .limit(1)
+      .execute();
 
     if (result.length === 0) {
       return {
