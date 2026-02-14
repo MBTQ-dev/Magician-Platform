@@ -1,6 +1,6 @@
-# 🌈 MBTQ.dev | AI-Powered Compliance and Workforce System 
+# 🌈 MBTQ.dev | Compliance and Workforce Modules 
 
-**A modular, production-ready reusable compliance and workflow system originally built to support deaf entrepreneurs, job seekers, developers, and creatives.**
+**A modular, production-ready reusable compliance and workflow mddules originally built to support deaf entrepreneurs, job seekers, developers, and creatives.**
 
 **Generative AI Platform for Building with Supabase & Modern Frameworks**
 
