@@ -232,13 +232,6 @@ export class CreativeMagicianService {
     tone: string,
     includeASL: boolean
   ): Promise<MarketingContent> {
-    const platformLimits: Record<string, number> = {
-      twitter: 280,
-      instagram: 2200,
-      facebook: 63206,
-      linkedin: 3000,
-      tiktok: 2200
-    };
 
     const hashtagSets: Record<string, string[]> = {
       general: ["#DeafOwned", "#AccessibleBusiness", "#Inclusion"],
