@@ -236,10 +236,6 @@ export class BusinessMagicianService {
     estimatedCost: number;
     processingTime: string;
   }> {
-    const providers = await db.query.formationProviders.findMany({
-      where: eq(formationProviders.isActive, true)
-    });
-
     // Default to Northwest as preferred provider
     return {
       name: "Northwest Registered Agent",
